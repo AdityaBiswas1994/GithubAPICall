@@ -2,7 +2,6 @@
 import org.json.*;
 
 import java.io.IOException;
-import java.net.*;
 import java.util.*;
 
 public class APICall
@@ -22,9 +21,9 @@ public class APICall
     public static final String URL= propData.get("URL");
     public static void main(String[] args) throws Exception
     {
-        GetUser userObj = new GetUser();
-        String baseurl = URL+"/?language="+propData.get("LANGUAGE").toString();
+        String baseurl = URL+"/?language="+propData.get("LANGUAGE");
         JSONObject users = GetUser.getRequest(baseurl);
+        //noinspection ConstantConditions
         if(users != null)
         {
             System.out.println(users);
