@@ -24,7 +24,6 @@ public class APICall
     {
         String baseurl = URL+"/?language="+propData.get("LANGUAGE");
         JSONArray users = GetUser.getRequest(baseurl);
-        //noinspection ConstantConditions
         file = new FileWriter(propData.get("OUTPUT_PATH"));
         try
         {
