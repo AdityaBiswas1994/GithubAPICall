@@ -1,13 +1,13 @@
 
 import org.json.*;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
 public class APICall
 {
     static Map<String, String> propData;
-
     static {
         try
         {
@@ -18,17 +18,44 @@ public class APICall
             throw new RuntimeException(e);
         }
     }
+    public static FileWriter file;
     public static final String URL= propData.get("URL");
     public static void main(String[] args) throws Exception
     {
         String baseurl = URL+"/?language="+propData.get("LANGUAGE");
-        JSONObject users = GetUser.getRequest(baseurl);
+        JSONArray users = GetUser.getRequest(baseurl);
+        //System.out.println(users);
         //noinspection ConstantConditions
-        if(users != null)
+        file = new FileWriter("src/src/main/java/output.json");
+        try
         {
-            System.out.println(users);
+            for (int i  = 0; i < users.length(); i++)
+            {
+                JSONObject obj = users.getJSONObject(i);
+                file.write(obj.toString());
+            }
         }
-        else
-            System.out.println("No Data fetched...!!! :( ");
+        catch (JSONException e)
+        {
+            throw new RuntimeException(e);
+        }
+        finally
+        {
+            try
+            {
+                file.flush();
+                file.close();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+//        if(users != null)
+//        {
+//            System.out.println(users);
+//        }
+//        else
+//            System.out.println("No Data fetched...!!! :( ");
     }
 }
