@@ -24,7 +24,6 @@ public class APICall
     {
         String baseurl = URL+"/?language="+propData.get("LANGUAGE");
         JSONArray users = GetUser.getRequest(baseurl);
-        //System.out.println(users);
         //noinspection ConstantConditions
         file = new FileWriter("src/src/main/java/output.json");
         try
@@ -51,11 +50,5 @@ public class APICall
                 e.printStackTrace();
             }
         }
-//        if(users != null)
-//        {
-//            System.out.println(users);
-//        }
-//        else
-//            System.out.println("No Data fetched...!!! :( ");
     }
 }
